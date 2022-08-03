@@ -30,6 +30,7 @@ public class MemberService {
         memberDetails.setGender(detailsDto.getGender());
         memberDetails.setOccupation(detailsDto.getOccupation());
         memberDetails.setWorkPlace(detailsDto.getWorkPlace());
+        memberDetails.setMemo(detailsDto.getMemo());
         memberDetails.setAge(MemberDetails.calcAge(detailsDto.getDob()));
     }
 
