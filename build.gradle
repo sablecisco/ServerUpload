@@ -40,14 +40,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-jar{
-	manifest{
-		attributes 'Main-Class': 'com.hj.hwt.JwtApplication'
-	}
-	from{
-		configurations.compile.collect{
-			it.isDirectory() ? it : zipTree(it)
-		}
-	}
-}
