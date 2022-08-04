@@ -38,21 +38,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (true) {
-            String name = headerNames.nextElement();
-            String header = request.getHeader(name);
-            System.out.println("name = " + name);
-            System.out.println("header = " + header);
-
-            if(!headerNames.hasMoreElements()) break;
-        }
-
         String access_token = request.getHeader("ACCESS_TOKEN");
         String refresh_token = request.getHeader("REFRESH_TOKEN");
-
-        System.out.println("access_token = " + access_token);
-        System.out.println("refresh_token = " + refresh_token);
 
 //        //header에 있는 jwt bearer 토큰 검증
 //        if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {

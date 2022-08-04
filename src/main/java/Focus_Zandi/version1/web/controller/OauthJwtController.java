@@ -25,16 +25,16 @@ public class OauthJwtController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/oauth/google")
-    public JwtReturner jwtCreate(@RequestBody Map<String, Object> data, HttpServletResponse response) {
+    public JwtReturner jwtCreate(@RequestBody Map<String, Object> data) {
         OAuthUserInfo googleUser =
                 new GoogleUser((Map<String, Object>)data.get("profileObj")); // 프론트가 보내준 json 받기
 
-        Member memberEntity = memberRepository.findByProviderId(googleUser.getProviderId());
+        Member memberEntity = memberRepository.findByUserToken(googleUser.getProviderId());
 
-        String provider = googleUser.getProvider();
+//        String provider = googleUser.getProvider();
         String providerId = googleUser.getProviderId();
         String name = googleUser.getName();
-        String username = provider + "_" + providerId;
+        String username = providerId + "_" + name;
         String password = bCryptPasswordEncoder.encode("CommonPassword");
         String email = googleUser.getEmail();
         MemberDetails memberDetails = new MemberDetails();
@@ -42,16 +42,13 @@ public class OauthJwtController {
         if(memberEntity == null) {
             Member memberRequest = Member.builder()
                     .username(username)
+                    .userToken(providerId)
                     .password(password)
                     .name(name)
                     .email(email)
-                    .providerId(providerId)
-                    .provider(provider)
                     .memberDetails(memberDetails)
                     .build();
             memberEntity = memberRepository.save(memberRequest);
-        } else {
-            System.out.println("User already Exists");
         }
 
 //        String AccessToken = JWT.create()

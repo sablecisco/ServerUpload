@@ -43,17 +43,16 @@ public class PrincipalOAuth2UserService extends DefaultOAuth2UserService {
         String email = oAuth2User.getAttribute("email");
         MemberDetails memberDetails = new MemberDetails();
 
-        Member memberEntity = memberRepository.findByProviderId(providerId);
+        Member memberEntity = memberRepository.findByUsername(username);
         if(memberEntity == null) {
             System.out.println("최초 로그인");
             memberEntity = Member.builder()
                     .username(username)
-                    .name(name)
+                    .userToken(providerId)
                     .password(password)
+                    .name(name)
                     .email(email)
                     .memberDetails(memberDetails)
-                    .provider(provider)
-                    .providerId(providerId)
                     .build();
             memberRepository.save(memberEntity);
         } else {

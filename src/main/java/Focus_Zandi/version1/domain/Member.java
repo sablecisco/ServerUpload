@@ -41,9 +41,7 @@ public class Member {
     private String name;
 
     @Column(nullable = false)
-    private String provider;
-    @Column(nullable = false)
-    private String providerId;
+    private String userToken;
 
     @CreationTimestamp
     private Timestamp createdAt;
@@ -51,13 +49,12 @@ public class Member {
     private Timestamp updatedAt;
 
     @Builder
-    public Member(String username, String password, String email, String name, String provider, String providerId, MemberDetails memberDetails) {
+    public Member(String username, String password, String email, String name, String userToken, MemberDetails memberDetails) {
         this.memberDetails = memberDetails;
         this.username = username;
         this.password = password;
         this.email = email;
         this.name = name;
-        this.provider = provider;
-        this.providerId = providerId;
+        this.userToken = userToken;
     }
 }

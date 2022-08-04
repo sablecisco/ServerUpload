@@ -13,7 +13,7 @@ public class CreateJwt {
         return JWT.create()
                 .withSubject(memberEntity.getUsername())
 //                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.EXPIRATION_TIME))
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60000*10))
+//                .withExpiresAt(new Date(System.currentTimeMillis() + 60000*10))
                 .withClaim("id", memberEntity.getId())
                 .withClaim("username", memberEntity.getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
@@ -22,7 +22,7 @@ public class CreateJwt {
     public static String createRefreshToken(Member memberEntity, String AccessToken) {
         return JWT.create()
                 .withSubject(memberEntity.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis()+ 60000*100))
+//                .withExpiresAt(new Date(System.currentTimeMillis()+ 60000*100))
                 .withClaim("AccessToken", AccessToken)
                 .withClaim("username", memberEntity.getUsername())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));

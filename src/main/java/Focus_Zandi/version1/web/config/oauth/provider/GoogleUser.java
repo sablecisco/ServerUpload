@@ -12,12 +12,7 @@ public class GoogleUser implements OAuthUserInfo{
 
     @Override
     public String getProviderId() {
-        return (String)attribute.get("googleId");
-    }
-
-    @Override
-    public String getProvider() {
-        return "google";
+        return (String)attribute.get("userToken");
     }
 
     @Override
@@ -27,7 +22,7 @@ public class GoogleUser implements OAuthUserInfo{
 
     @Override
     public String getName() {
-        return (String)attribute.get("name");
+        return (String)attribute.get("fullName");
     }
 
 }

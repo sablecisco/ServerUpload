@@ -25,7 +25,7 @@ public class MemberController {
     private final MemberService memberService;
 
     //DTO 수정해서 프론트 요구사항 맞추면 됨
-    // 유저 정보 조회
+    //유저 정보 조회
     @GetMapping("/showMember")
     public MemberReturnerDto showMember(HttpServletRequest request, Authentication authentication) {
         String username = getUsername(authentication);
@@ -37,8 +37,6 @@ public class MemberController {
     public MemberReturnerDto showMemberByName(@PathVariable String name) {
         return memberService.findMemberByUserNameWithDetailsV2(name);
     }
-
-
 
     // 유저 정보 수정 (최초생성시에는 null로 기입)
     @PostMapping("/editMember")
@@ -78,6 +76,4 @@ public class MemberController {
 //        SecurityContextImpl context = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
 //        return context.getAuthentication().getName();
 //    }
-
-
 }
