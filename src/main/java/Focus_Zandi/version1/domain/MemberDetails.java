@@ -24,7 +24,7 @@ public class MemberDetails {
 
     private String occupation;
     private String workPlace;
-    private String memo;
+    private String memo = "한줄 소개를 입력해주세요";
 
     public static int calcAge(String dob) {
         int year = LocalDate.now().getYear();
