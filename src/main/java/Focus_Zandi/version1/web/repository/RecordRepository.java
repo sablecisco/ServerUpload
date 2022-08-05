@@ -56,28 +56,56 @@ public class RecordRepository {
         return resultList.get(0);
     }
 
-    public List<Integer> findAllByMonth(String month, Member member) {
+//    public List<Integer> findAllByMonth(String month, Member member) {
+//        LocalDate now = LocalDate.now();
+//        String year = Integer.toString(now.getYear());
+//        List resultList = em.createQuery("Select r.total_time from Records r where r.member = :member and r.year = :year and r.month = :month")
+//                .setParameter("member", member)
+//                .setParameter("year", year)
+//                .setParameter("month", month)
+//                .getResultList();
+//
+//        return resultList;
+//    }
+
+//    public List<MonthlyRecordsDto> findAllByMonthV2(String month, Member member) {
+//        LocalDate now = LocalDate.now();
+//        String year = Integer.toString(now.getYear());
+//        List<Records> records = em.createQuery("Select r from Records r where r.member = :member and r.year = :year and r.month = :month")
+//                .setParameter("member", member)
+//                .setParameter("year", year)
+//                .setParameter("month", month)
+//                .getResultList();
+//
+//        List<MonthlyRecordsDto> recordsDtoList = new ArrayList<>();
+//        Map<String, List> monthlyRecord = new HashMap<>();
+//
+//        for (Records record : records) {
+//            recordsDtoList.add(new MonthlyRecordsDto(record));
+//        }
+//        monthlyRecord.put("monthlyRecord", recordsDtoList);
+//
+//        return recordsDtoList;
+//    }
+
+    public Map<String, List<MonthlyRecordsDto>> findAllByMonth(String month, Member member) {
         LocalDate now = LocalDate.now();
         String year = Integer.toString(now.getYear());
-        List resultList = em.createQuery("Select r.total_time from Records r where r.member = :member and r.year = :year and r.month = :month")
+        List<Records> records = em.createQuery("Select r from Records r where r.member = :member and r.year = :year and r.month = :month")
                 .setParameter("member", member)
                 .setParameter("year", year)
                 .setParameter("month", month)
                 .getResultList();
 
-        return resultList;
-    }
+        List<MonthlyRecordsDto> recordsDtoList = new ArrayList<>();
+        Map<String, List<MonthlyRecordsDto>> monthRecord = new HashMap<>();
 
-    public List<MonthlyRecordsDto> findAllByMonthV2(String month, Member member) {
-        LocalDate now = LocalDate.now();
-        String year = Integer.toString(now.getYear());
-        List<MonthlyRecordsDto> resultList = em.createQuery("Select r.day, r.total_time from Records r where r.member = :member and r.year = :year and r.month = :month")
-                .setParameter("member", member)
-                .setParameter("year", year)
-                .setParameter("month", month)
-                .getResultList();
+        for (Records record : records) {
+            recordsDtoList.add(new MonthlyRecordsDto(record));
+        }
+        monthRecord.put("monthRecord", recordsDtoList);
 
-        return resultList;
+        return monthRecord;
     }
 
     public List<MyFollowersDto> findFollowersDailyRecords(List<String> followers) {

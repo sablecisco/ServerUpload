@@ -4,14 +4,20 @@ import Focus_Zandi.version1.domain.Followers;
 import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.MemberDetails;
 import Focus_Zandi.version1.domain.dto.DetailsDto;
+import Focus_Zandi.version1.domain.dto.FolloweeReturner;
 import Focus_Zandi.version1.domain.dto.MemberReturnerDto;
+import Focus_Zandi.version1.domain.dto.MonthlyRecordsDto;
 import Focus_Zandi.version1.web.repository.FollowersRepository;
 import Focus_Zandi.version1.web.repository.MemberRepository;
+import Focus_Zandi.version1.web.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +26,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final FollowersRepository followersRepository;
+    private final RecordRepository recordRepository;
 
     public void join(DetailsDto detailsDto, String username) {
         Member member = memberRepository.findByUsername(username);
@@ -52,19 +59,38 @@ public class MemberService {
         return memberReturnerDto;
     }
 
-    public void makeFollow(String followeeName, String username) {
+    public FolloweeReturner makeFollow(String followeeName, String username) {
+        LocalDate now = LocalDate.now();
+        int monthValue = now.getMonthValue();
+        String month = "";
+        if (monthValue < 10) {
+            month = '0' + String.valueOf(monthValue);
+        } else if (monthValue == 11 || monthValue == 12) {
+            month = String.valueOf(monthValue);
+        }
+
         Member followee = memberRepository.findByUsername(followeeName);
         Member follower = memberRepository.findByUsername(username);
 
         Followers followerShip = Followers.createFollowerShip(followee.getId(), follower);
 
         followersRepository.makeFollow(followerShip);
+
+        MemberReturnerDto followeeReturner = findMemberByUserNameWithDetails(followeeName);
+        Map<String, List<MonthlyRecordsDto>> allByMonth = recordRepository.findAllByMonth(month, followee);
+
+        FolloweeReturner followeeData = new FolloweeReturner(followeeReturner, allByMonth);
+        return followeeData;
     }
 
     public void makeUnFollow(String followeeName, String username) {
         long followeeId = memberRepository.findByUsername(followeeName).getId();
         Member follower = memberRepository.findByUsername(username);
         followersRepository.unFollow(followeeId, follower);
+    }
+
+    public void deleteAll(String username) {
+//        memberRepository.deleteByUserName()
     }
 
     //추후 수정

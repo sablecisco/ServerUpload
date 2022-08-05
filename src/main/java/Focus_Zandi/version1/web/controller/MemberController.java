@@ -4,6 +4,7 @@ import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.MemberDetails;
 import Focus_Zandi.version1.domain.dto.DetailsDto;
 import Focus_Zandi.version1.domain.dto.FolloweeNameDto;
+import Focus_Zandi.version1.domain.dto.FolloweeReturner;
 import Focus_Zandi.version1.domain.dto.MemberReturnerDto;
 import Focus_Zandi.version1.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,18 @@ public class MemberController {
         return details;
     }
 
+    @PostMapping("/memberQuit")
+    public void memberQuit(Authentication authentication, HttpServletResponse response) throws IOException {
+        String username = getUsername(authentication);
+        memberService.deleteAll(username);
+        Member memberByUserName = memberService.findMemberByUserName(username);
+        if (memberByUserName == null) {
+            response.setStatus(200);
+        } else {
+            response.sendError(400, "Delete FAILED!");
+        }
+    }
+
     @GetMapping("/members/{name}")
     public MemberReturnerDto showMemberByName(@PathVariable String name) {
         return memberService.findMemberByUserNameWithDetailsV2(name);
@@ -46,10 +59,16 @@ public class MemberController {
     }
 
     // 친구 추가
+//    @PostMapping("/addFriend")
+//    public int followMember(@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
+//        memberService.makeFollow(followeeName.getFolloweeName(), getUsername(authentication));
+//        return response.getStatus();
+//    }
+
+    // 친구 추가
     @PostMapping("/addFriend")
-    public int followMember(@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
-        memberService.makeFollow(followeeName.getFolloweeName(), getUsername(authentication));
-        return response.getStatus();
+    public FolloweeReturner addFriend (@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
+        return memberService.makeFollow(followeeName.getFolloweeName(), getUsername(authentication));
     }
 
     // 친구 삭제

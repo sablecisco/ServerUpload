@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,11 +50,21 @@ public class RecordController {
 
     // 월별 데이터 반환 (날짜와 총 집중시간)
     // 이번달 공부내역 조회
+//    @GetMapping("/records/monthly")
+//    public List<MonthlyRecordsDto> monthlyRecords(@RequestParam String month, Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        List<MonthlyRecordsDto> monthly = recordService.findMonthlyV2(month, getUsername(authentication));
+//        if (monthly.isEmpty()) {
+//            response.sendError(400);
+//        }
+//        return monthly;
+//    }
+
+    // Map 형태 반환
     @GetMapping("/records/monthly")
-    public List<MonthlyRecordsDto> monthlyRecordsV2(@RequestParam String month, Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<MonthlyRecordsDto> monthly = recordService.findMonthlyV2(month, getUsername(authentication));
+    public Map<String, List<MonthlyRecordsDto>> monthlyRecords(@RequestParam String month, Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, List<MonthlyRecordsDto>> monthly = recordService.findMonthly(month, getUsername(authentication));
         if (monthly.isEmpty()) {
-            response.sendError(400);
+            response.sendError(400, "No Data Found");
         }
         return monthly;
     }

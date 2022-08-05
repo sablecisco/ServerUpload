@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -43,14 +44,14 @@ public class RecordService {
         return recordRepository.findRecordByTimeStamp(member, date);
     }
 
-    public List<Integer> findMonthly(String month, String username) {
+//    public List<MonthlyRecordsDto> findMonthlyV2(String month, String username) {
+//        Member member = memberRepository.findByUsername(username);
+//        return recordRepository.findAllByMonthV2(month, member);
+//    }
+
+    public Map<String, List<MonthlyRecordsDto>> findMonthly(String month, String username) {
         Member member = memberRepository.findByUsername(username);
         return recordRepository.findAllByMonth(month, member);
-    }
-
-    public List<MonthlyRecordsDto> findMonthlyV2(String month, String username) {
-        Member member = memberRepository.findByUsername(username);
-        return recordRepository.findAllByMonthV2(month, member);
     }
 
     public List<MyFollowersDto> dailyRanks(String username) {

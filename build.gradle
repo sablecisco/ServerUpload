@@ -24,7 +24,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'mysql:mysql-connector-java'
-	implementation 'com.auth0:java-jwt:3.19.2'
+	implementation 'com.auth0:java-jwt:4.0.0'
 
 
 	implementation 'com.google.code.gson:gson:2.9.0'
