@@ -72,6 +72,9 @@ public class MemberService {
         Member followee = memberRepository.findByUsername(followeeName);
         Member follower = memberRepository.findByUsername(username);
 
+        int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
+        follower.getMemberDetails().setNumberOfFollowers(numberOfFollowers + 1);
+
         Followers followerShip = Followers.createFollowerShip(followee.getId(), follower);
 
         followersRepository.makeFollow(followerShip);
@@ -86,6 +89,10 @@ public class MemberService {
     public void makeUnFollow(String followeeName, String username) {
         long followeeId = memberRepository.findByUsername(followeeName).getId();
         Member follower = memberRepository.findByUsername(username);
+
+        int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
+        follower.getMemberDetails().setNumberOfFollowers(numberOfFollowers - 1);
+
         followersRepository.unFollow(followeeId, follower);
     }
 

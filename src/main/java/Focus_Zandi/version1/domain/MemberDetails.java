@@ -24,6 +24,7 @@ public class MemberDetails {
 
     private String occupation;
     private String workPlace;
+    private int numberOfFollowers = 0;
     private String memo = "한줄 소개를 입력해주세요";
 
     public static int calcAge(String dob) {

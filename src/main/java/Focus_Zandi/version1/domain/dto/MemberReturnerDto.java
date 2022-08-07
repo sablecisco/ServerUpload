@@ -12,11 +12,13 @@ public class MemberReturnerDto {
     private String email;
     private String fullName;
     private String memo;
+    private int numberOfFollowers;
 
     public MemberReturnerDto(Member member, MemberDetails details) {
         this.userToken = member.getUserToken();
         this.fullName = member.getName();
         this.email = member.getEmail();
         this.memo = details.getMemo();
+        this.numberOfFollowers = details.getNumberOfFollowers();
     }
 }
