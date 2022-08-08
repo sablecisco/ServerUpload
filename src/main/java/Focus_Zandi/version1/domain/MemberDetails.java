@@ -15,6 +15,10 @@ public class MemberDetails {
     @Column(name = "MEMBERDETAILS_ID")
     private long id;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
+
     @Column(nullable = false)
     private String role = "ROLE_USER";
 

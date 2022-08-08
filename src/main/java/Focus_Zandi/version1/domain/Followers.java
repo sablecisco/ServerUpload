@@ -17,7 +17,7 @@ public class Followers {
     @Column(name = "FOLLOWERS_TABLE_ID")
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 

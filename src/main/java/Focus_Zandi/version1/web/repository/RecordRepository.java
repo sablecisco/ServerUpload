@@ -119,6 +119,12 @@ public class RecordRepository {
         return resultList;
     }
 
+    public void deleteByMember(Member member) {
+        em.createQuery("Delete from Records r where r.member = :member")
+                .setParameter("member", member)
+                .executeUpdate();
+    }
+
 //    public List findFollowersDailyRecords(Member member) {
 ////        String jpql = "Select r.member, r.maxConcentrationTime from Followers f join fetch Records r on f.followeeId =  where f.member = :member";
 ////        List<FriendRankDto> resultList = em.createQuery(jpql)

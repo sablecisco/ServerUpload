@@ -44,4 +44,10 @@ public class FollowersRepository {
         }
         return followedMembers;
     }
+
+    public void deleteByMember(Member member) {
+        em.createQuery("Delete from Followers f where f.member = :member")
+                .setParameter("member", member)
+                .executeUpdate();
+    }
 }

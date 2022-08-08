@@ -97,7 +97,12 @@ public class MemberService {
     }
 
     public void deleteAll(String username) {
-//        memberRepository.deleteByUserName()
+        Member member = findMemberByUserName(username);
+        followersRepository.deleteByMember(member);
+        recordRepository.deleteByMember(member);
+        memberRepository.deleteByUserName(username);
+        long id = member.getMemberDetails().getId();
+        memberRepository.deleteDetails(id);
     }
 
     //추후 수정

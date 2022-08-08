@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "Records")
 public class Records {
 
-    @ManyToOne(fetch = FetchType.LAZY) // 연관관계가 이게 맞나
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // 연관관계가 이게 맞나
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 

@@ -13,15 +13,19 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
     // select * from user where username = ?;
     //라는 sql 자동 생성
 
-    public Member findById(long id);
+    Member findById(long id);
 
-    public Member findByUsername(String username);
+    Member findByUsername(String username);
 
-    public Member findByUserToken(String providerId);
+    Member findByUserToken(String providerId);
 
-    public Member findByName(String name);
+    Member findByName(String name);
 
-//    @Modifying
-//    @Query("Delete ")
-//    public void deleteByUserName(@Param("username") String username);
+    @Modifying
+    @Query("Delete from Member m where m.username = :username")
+    void deleteByUserName(@Param("username") String username);
+
+    @Modifying
+    @Query("Delete from MemberDetails md where md.id = :id")
+    void deleteDetails(@Param("id") long id);
 }
