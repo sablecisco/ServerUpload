@@ -69,7 +69,8 @@ public class MemberService {
             month = String.valueOf(monthValue);
         }
 
-        Member followee = memberRepository.findByUsername(followeeName);
+        Member followee = memberRepository.findByName(followeeName);
+        String followeeUsername = followee.getUsername();
         Member follower = memberRepository.findByUsername(username);
 
         int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
@@ -79,7 +80,7 @@ public class MemberService {
 
         followersRepository.makeFollow(followerShip);
 
-        MemberReturnerDto followeeReturner = findMemberByUserNameWithDetails(followeeName);
+        MemberReturnerDto followeeReturner = findMemberByUserNameWithDetails(followeeUsername);
         Map<String, List<MonthlyRecordsDto>> allByMonth = recordRepository.findAllByMonth(month, followee);
 
         FolloweeReturner followeeData = new FolloweeReturner(followeeReturner, allByMonth);
@@ -87,7 +88,7 @@ public class MemberService {
     }
 
     public void makeUnFollow(String followeeName, String username) {
-        long followeeId = memberRepository.findByUsername(followeeName).getId();
+        long followeeId = memberRepository.findByName(followeeName).getId();
         Member follower = memberRepository.findByUsername(username);
 
         int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
