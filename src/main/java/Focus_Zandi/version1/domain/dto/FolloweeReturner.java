@@ -11,12 +11,12 @@ public class FolloweeReturner {
     private String username;
     private String memo;
     private int numberOfFollowers;
-    private Map<String, List<MonthlyRecordsDto>> monthRecord;
+    private List<MonthlyRecordsDto> monthRecord;
 
     public FolloweeReturner(MemberReturnerDto followeeReturner, Map<String, List<MonthlyRecordsDto>> allByMonth) {
         this.username = followeeReturner.getFullName();
         this.memo = followeeReturner.getMemo();
         this.numberOfFollowers = followeeReturner.getNumberOfFollowers();
-        this.monthRecord = allByMonth;
+        this.monthRecord = allByMonth.get("monthRecord");
     }
 }
