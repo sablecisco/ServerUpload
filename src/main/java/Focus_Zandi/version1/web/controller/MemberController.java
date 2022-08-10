@@ -66,15 +66,15 @@ public class MemberController {
 //    }
 
     // 친구 추가
-    @PostMapping("/addFriend")
-    public FolloweeReturner addFriend (@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
-        return memberService.makeFollow(followeeName.getFolloweeName(), getUsername(authentication));
+    @GetMapping("/addFriend/{followeeName}")
+    public FolloweeReturner addFriend (@PathVariable String followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
+        return memberService.makeFollow(followeeName, getUsername(authentication));
     }
 
     // 친구 삭제
-    @PostMapping("/removeFriend")
-    public int unfollowMember(@RequestBody FolloweeNameDto followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
-        memberService.makeUnFollow(followeeName.getFolloweeName(), getUsername(authentication));
+    @GetMapping("/removeFriend/{followeeName}")
+    public int unfollowMember(@PathVariable String followeeName, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
+        memberService.makeUnFollow(followeeName, getUsername(authentication));
         return response.getStatus();
     }
 

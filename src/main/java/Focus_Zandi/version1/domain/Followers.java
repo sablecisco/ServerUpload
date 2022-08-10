@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Getter @Setter
-public class Followers {
+public class Followers extends JpaBaseEntity{
 
     @Id @GeneratedValue
     @Column(name = "FOLLOWERS_TABLE_ID")
@@ -27,10 +27,10 @@ public class Followers {
 //    @Column(nullable = false)
 //    private boolean status = true;
 
-    @CreationTimestamp
-    private Timestamp createdAt;
-    @UpdateTimestamp
-    private Timestamp updatedAt;
+//    @CreationTimestamp
+//    private Timestamp createdAt;
+//    @UpdateTimestamp
+//    private Timestamp updatedAt;
 
     //B logic
 

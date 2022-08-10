@@ -10,7 +10,7 @@ import java.util.List;
 @Getter @Setter
 @Entity
 @Table(name = "Records")
-public class Records {
+public class Records extends JpaBaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // 연관관계가 이게 맞나
     @JoinColumn(name = "MEMBER_ID")

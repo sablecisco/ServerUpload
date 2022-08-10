@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
-public class MemberDetails {
+public class MemberDetails extends JpaBaseEntity {
 
     @Id
     @GeneratedValue

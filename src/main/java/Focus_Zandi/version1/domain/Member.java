@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "Members")
-public class Member {
+public class Member extends JpaBaseEntity{
 
     @Id
     @GeneratedValue
@@ -43,10 +43,10 @@ public class Member {
     @Column(nullable = false)
     private String userToken;
 
-    @CreationTimestamp
-    private Timestamp createdAt;
-    @UpdateTimestamp
-    private Timestamp updatedAt;
+//    @CreationTimestamp
+//    private Timestamp createdAt;
+//    @UpdateTimestamp
+//    private Timestamp updatedAt;
 
     @Builder
     public Member(String username, String password, String email, String name, String userToken, MemberDetails memberDetails) {
