@@ -59,7 +59,7 @@ public class MemberService {
         return memberReturnerDto;
     }
 
-    public FolloweeReturner makeFollow(String followeeName, String username) {
+    public FolloweeReturner makeFollow(String email, String username) {
         LocalDate now = LocalDate.now();
         int monthValue = now.getMonthValue();
         String month = "";
@@ -69,7 +69,7 @@ public class MemberService {
             month = String.valueOf(monthValue);
         }
 
-        Member followee = memberRepository.findByName(followeeName);
+        Member followee = memberRepository.findByEmail(email);
         String followeeUsername = followee.getUsername();
         Member follower = memberRepository.findByUsername(username);
 
@@ -87,8 +87,8 @@ public class MemberService {
         return followeeData;
     }
 
-    public void makeUnFollow(String followeeName, String username) {
-        long followeeId = memberRepository.findByName(followeeName).getId();
+    public void makeUnFollow(String email, String username) {
+        long followeeId = memberRepository.findByEmail(email).getId();
         Member follower = memberRepository.findByUsername(username);
 
         int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();

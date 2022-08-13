@@ -112,7 +112,11 @@ public class RecordRepository {
         List<MyFollowersDto> resultList = new ArrayList<>();
         for (String follower : followers) {
             Member findMember = memberRepository.findByUsername(follower);
-            int maxConcentrationTime = findRecordByTimeStamp(findMember, LocalDateTime.now().toString()).getMaxConcentrationTime();
+            Records recordByTimeStamp = findRecordByTimeStamp(findMember, LocalDateTime.now().toString());
+            int maxConcentrationTime = 0;
+            if (recordByTimeStamp != null) {
+                maxConcentrationTime = recordByTimeStamp.getMaxConcentrationTime();
+            }
             MyFollowersDto myFollowersDto = new MyFollowersDto(follower, maxConcentrationTime);
             resultList.add(myFollowersDto);
         }

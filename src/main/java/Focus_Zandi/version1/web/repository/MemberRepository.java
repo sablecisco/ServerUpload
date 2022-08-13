@@ -21,6 +21,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
     Member findByName(String name);
 
+    Member findByEmail(String email);
+
     @Modifying
     @Query("Delete from Member m where m.username = :username")
     void deleteByUserName(@Param("username") String username);
