@@ -2,10 +2,7 @@ package Focus_Zandi.version1.web.controller;
 
 import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.MemberDetails;
-import Focus_Zandi.version1.domain.dto.DetailsDto;
-import Focus_Zandi.version1.domain.dto.FolloweeNameDto;
-import Focus_Zandi.version1.domain.dto.FolloweeReturner;
-import Focus_Zandi.version1.domain.dto.MemberReturnerDto;
+import Focus_Zandi.version1.domain.dto.*;
 import Focus_Zandi.version1.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -75,6 +72,18 @@ public class MemberController {
     @GetMapping("/removeFriend/{email}")
     public int unfollowMember(@PathVariable String email, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
         memberService.makeUnFollow(email, getUsername(authentication));
+        return response.getStatus();
+    }
+
+    @GetMapping("/getNumberOfFollowers")
+    public int getNumberOfFollowers(Authentication authentication) {
+        return memberService.getNumberOfFollower(getUsername(authentication));
+    }
+
+    @PostMapping("/addNumberOfFollowers")
+    public int setNumberOfFollowers(@RequestBody FollowerNumDto followerNumDto, Authentication authentication, HttpServletResponse response) throws IOException {
+        int check = memberService.setNumberOfFollow(followerNumDto.getNumberOfFollowers(), getUsername(authentication));
+        if (check != followerNumDto.getNumberOfFollowers()) response.setStatus(400);
         return response.getStatus();
     }
 

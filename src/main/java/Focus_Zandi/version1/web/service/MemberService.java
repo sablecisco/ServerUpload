@@ -73,8 +73,8 @@ public class MemberService {
         String followeeUsername = followee.getUsername();
         Member follower = memberRepository.findByUsername(username);
 
-        int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
-        follower.getMemberDetails().setNumberOfFollowers(numberOfFollowers + 1);
+//        int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
+//        follower.getMemberDetails().setNumberOfFollowers(numberOfFollowers + 1);
 
         Followers followerShip = Followers.createFollowerShip(followee.getId(), follower);
 
@@ -91,8 +91,8 @@ public class MemberService {
         long followeeId = memberRepository.findByEmail(email).getId();
         Member follower = memberRepository.findByUsername(username);
 
-        int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
-        follower.getMemberDetails().setNumberOfFollowers(numberOfFollowers - 1);
+//        int numberOfFollowers = follower.getMemberDetails().getNumberOfFollowers();
+//        follower.getMemberDetails().setNumberOfFollowers(numberOfFollowers - 1);
 
         followersRepository.unFollow(followeeId, follower);
     }
@@ -112,15 +112,17 @@ public class MemberService {
 //        return updatedMember;
 //    }
 
-    private void validateDuplicateMember(Member member) {
-        Member findMember = memberRepository.findByUsername(member.getUsername());
-        if (findMember != null) {
-            throw new IllegalArgumentException("이미 존재하는 회원입니다.");
-        }
-    }
-
     public List<String> getFollowers(String username) {
         Member member = memberRepository.findByUsername(username);
         return followersRepository.findFollowers(member);
+    }
+
+    public int setNumberOfFollow(int numberOfFollowers, String username) {
+        memberRepository.findByUsername(username).getMemberDetails().setNumberOfFollowers(numberOfFollowers);
+        return memberRepository.findByUsername(username).getMemberDetails().getNumberOfFollowers();
+    }
+
+    public int getNumberOfFollower(String username) {
+        return memberRepository.findByUsername(username).getMemberDetails().getNumberOfFollowers();
     }
 }
