@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class FollowerNumDto {
+public class FollowerNumberReturnerNumDto {
 
     private int numberOfFollowers;
 
-    public FollowerNumDto(int numberOfFollower) {
+    public FollowerNumberReturnerNumDto(int numberOfFollower) {
         this.numberOfFollowers = numberOfFollower;
     }
 }

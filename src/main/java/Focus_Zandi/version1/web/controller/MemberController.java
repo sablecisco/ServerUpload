@@ -2,7 +2,8 @@ package Focus_Zandi.version1.web.controller;
 
 import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.dto.followdto.FolloweeReturner;
-import Focus_Zandi.version1.domain.dto.followdto.FollowerNumDto;
+import Focus_Zandi.version1.domain.dto.followdto.FollowerNumberReturnerNumDto;
+import Focus_Zandi.version1.domain.dto.followdto.FollowerSetterDto;
 import Focus_Zandi.version1.domain.dto.memberdto.DetailsDto;
 import Focus_Zandi.version1.domain.dto.memberdto.MemberReturnerDto;
 import Focus_Zandi.version1.web.service.MemberService;
@@ -76,13 +77,13 @@ public class MemberController {
     }
 
     @GetMapping("/getNumberOfFollowers")
-    public FollowerNumDto getNumberOfFollowers(Authentication authentication) {
+    public FollowerNumberReturnerNumDto getNumberOfFollowers(Authentication authentication) {
         int numberOfFollower = memberService.getNumberOfFollower(getUsername(authentication));
-        return new FollowerNumDto(numberOfFollower);
+        return new FollowerNumberReturnerNumDto(numberOfFollower);
     }
 
     @PostMapping("/addNumberOfFollowers")
-    public int setNumberOfFollowers(@RequestBody FollowerNumDto followerNumDto, Authentication authentication, HttpServletResponse response) throws IOException {
+    public int setNumberOfFollowers(@RequestBody FollowerSetterDto followerNumDto, Authentication authentication, HttpServletResponse response) throws IOException {
         int check = memberService.setNumberOfFollow(followerNumDto.getNumberOfFollowers(), getUsername(authentication));
         if (check != followerNumDto.getNumberOfFollowers()) response.setStatus(400);
         return response.getStatus();
