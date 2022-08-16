@@ -2,8 +2,8 @@ package Focus_Zandi.version1.web.repository;
 
 import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.Records;
-import Focus_Zandi.version1.domain.dto.MonthlyRecordsDto;
-import Focus_Zandi.version1.domain.dto.MyFollowersDto;
+import Focus_Zandi.version1.domain.dto.recorddto.MonthlyRecordsDto;
+import Focus_Zandi.version1.domain.dto.followdto.MyFollowersDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

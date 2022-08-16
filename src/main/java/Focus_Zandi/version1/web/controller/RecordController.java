@@ -1,17 +1,18 @@
 package Focus_Zandi.version1.web.controller;
 
 import Focus_Zandi.version1.domain.Records;
-import Focus_Zandi.version1.domain.dto.*;
+import Focus_Zandi.version1.domain.dto.followdto.MyFollowersDto;
+import Focus_Zandi.version1.domain.dto.recorddto.MonthlyRecordsDto;
+import Focus_Zandi.version1.domain.dto.recorddto.RecordReturnerDto;
+import Focus_Zandi.version1.domain.dto.recorddto.RecordsDto;
 import Focus_Zandi.version1.web.service.RecordService;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;

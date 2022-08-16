@@ -1,22 +1,16 @@
 package Focus_Zandi.version1.web.config.auth;
 
-import Focus_Zandi.version1.domain.Member;
-import Focus_Zandi.version1.domain.dto.MemberReturnerDto;
 import Focus_Zandi.version1.web.repository.MemberRepository;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Enumeration;
 
 @RequiredArgsConstructor
 @Slf4j

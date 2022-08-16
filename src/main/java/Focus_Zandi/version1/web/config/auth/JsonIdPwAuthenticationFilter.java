@@ -1,6 +1,6 @@
 package Focus_Zandi.version1.web.config.auth;
 
-import Focus_Zandi.version1.domain.dto.MemberLoginDto;
+import Focus_Zandi.version1.domain.dto.memberdto.MemberLoginDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

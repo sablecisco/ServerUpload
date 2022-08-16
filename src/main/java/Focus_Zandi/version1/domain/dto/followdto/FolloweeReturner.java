@@ -1,5 +1,7 @@
-package Focus_Zandi.version1.domain.dto;
+package Focus_Zandi.version1.domain.dto.followdto;
 
+import Focus_Zandi.version1.domain.dto.recorddto.MonthlyRecordsDto;
+import Focus_Zandi.version1.domain.dto.memberdto.MemberReturnerDto;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package Focus_Zandi.version1.domain.dto;
+package Focus_Zandi.version1.domain.dto.recorddto;
 
 import Focus_Zandi.version1.domain.Member;
 import lombok.Getter;

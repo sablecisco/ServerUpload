@@ -1,18 +1,18 @@
 package Focus_Zandi.version1.web.controller;
 
 import Focus_Zandi.version1.domain.Member;
-import Focus_Zandi.version1.domain.MemberDetails;
-import Focus_Zandi.version1.domain.dto.*;
+import Focus_Zandi.version1.domain.dto.followdto.FolloweeReturner;
+import Focus_Zandi.version1.domain.dto.followdto.FollowerNumDto;
+import Focus_Zandi.version1.domain.dto.memberdto.DetailsDto;
+import Focus_Zandi.version1.domain.dto.memberdto.MemberReturnerDto;
 import Focus_Zandi.version1.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -76,8 +76,9 @@ public class MemberController {
     }
 
     @GetMapping("/getNumberOfFollowers")
-    public int getNumberOfFollowers(Authentication authentication) {
-        return memberService.getNumberOfFollower(getUsername(authentication));
+    public FollowerNumDto getNumberOfFollowers(Authentication authentication) {
+        int numberOfFollower = memberService.getNumberOfFollower(getUsername(authentication));
+        return new FollowerNumDto(numberOfFollower);
     }
 
     @PostMapping("/addNumberOfFollowers")

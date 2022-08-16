@@ -2,9 +2,9 @@ package Focus_Zandi.version1.web.service;
 
 import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.Records;
-import Focus_Zandi.version1.domain.dto.MonthlyRecordsDto;
-import Focus_Zandi.version1.domain.dto.MyFollowersDto;
-import Focus_Zandi.version1.domain.dto.RecordsDto;
+import Focus_Zandi.version1.domain.dto.recorddto.MonthlyRecordsDto;
+import Focus_Zandi.version1.domain.dto.followdto.MyFollowersDto;
+import Focus_Zandi.version1.domain.dto.recorddto.RecordsDto;
 import Focus_Zandi.version1.web.repository.FollowersRepository;
 import Focus_Zandi.version1.web.repository.MemberRepository;
 import Focus_Zandi.version1.web.repository.RecordRepository;

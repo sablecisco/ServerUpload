@@ -3,10 +3,10 @@ package Focus_Zandi.version1.web.service;
 import Focus_Zandi.version1.domain.Followers;
 import Focus_Zandi.version1.domain.Member;
 import Focus_Zandi.version1.domain.MemberDetails;
-import Focus_Zandi.version1.domain.dto.DetailsDto;
-import Focus_Zandi.version1.domain.dto.FolloweeReturner;
-import Focus_Zandi.version1.domain.dto.MemberReturnerDto;
-import Focus_Zandi.version1.domain.dto.MonthlyRecordsDto;
+import Focus_Zandi.version1.domain.dto.memberdto.DetailsDto;
+import Focus_Zandi.version1.domain.dto.followdto.FolloweeReturner;
+import Focus_Zandi.version1.domain.dto.memberdto.MemberReturnerDto;
+import Focus_Zandi.version1.domain.dto.recorddto.MonthlyRecordsDto;
 import Focus_Zandi.version1.web.repository.FollowersRepository;
 import Focus_Zandi.version1.web.repository.MemberRepository;
 import Focus_Zandi.version1.web.repository.RecordRepository;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 

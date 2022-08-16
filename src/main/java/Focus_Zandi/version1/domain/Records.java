@@ -1,11 +1,10 @@
 package Focus_Zandi.version1.domain;
 
-import Focus_Zandi.version1.domain.dto.RecordsDto;
+import Focus_Zandi.version1.domain.dto.recorddto.RecordsDto;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter @Setter
 @Entity
