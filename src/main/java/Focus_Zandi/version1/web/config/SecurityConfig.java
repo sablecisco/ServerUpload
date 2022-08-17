@@ -45,11 +45,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manger/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
                 .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/oauth/**").permitAll()
+
+                .antMatchers("/Photo/**").permitAll()
+                .antMatchers("/style.css").permitAll()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/oauth/**");
+        web.ignoring().antMatchers("/");
+        web.ignoring().antMatchers("/Photo/**");
+        web.ignoring().antMatchers("/style.css");
     }
 }
