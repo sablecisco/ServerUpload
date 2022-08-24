@@ -25,6 +25,7 @@ public class RecordController {
     private final RecordService recordService;
 
     // 오늘 공부기록 저장
+    // save에서 검증해서 오류검증할 필요가 없음
     @PostMapping("/saveRecords/today")
     public int receiveRecord (@RequestBody RecordsDto recordsDto, Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
         String username = getUsername(authentication);
@@ -33,6 +34,7 @@ public class RecordController {
     }
 
     // api시트에서 못 찾음
+    // 테스트용 코드
     @GetMapping("/showRecords")
     public void showTodayRecord(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = getUsername(authentication);

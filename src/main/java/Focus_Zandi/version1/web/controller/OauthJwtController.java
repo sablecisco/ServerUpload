@@ -51,23 +51,6 @@ public class OauthJwtController {
             memberEntity = memberRepository.save(memberRequest);
         }
 
-//        String AccessToken = JWT.create()
-//                .withSubject(memberEntity.getUsername())
-////                .withExpiresAt(new Date(System.currentTimeMillis()+ JwtProperties.EXPIRATION_TIME))
-//                .withExpiresAt(new Date(System.currentTimeMillis() + 30000))
-//                .withClaim("id", memberEntity.getId())
-//                .withClaim("username", memberEntity.getUsername())
-//                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-//
-//        String RefToken = JWT.create()
-//                .withSubject(memberEntity.getUsername())
-//                .withExpiresAt(new Date(System.currentTimeMillis()+ 60000*100))
-//                .withClaim("AccessToken", AccessToken)
-//                .withClaim("username", memberEntity.getUsername())
-//                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-
-//        String jwtToken = CreateJwt.createAccessToken(memberEntity);
-
         String accessToken = CreateJwt.createAccessToken(memberEntity);
         String refreshToken = CreateJwt.createRefreshToken(memberEntity, accessToken);
 

@@ -4,9 +4,6 @@ import Focus_Zandi.version1.domain.Member;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
-import java.security.Key;
-import java.util.Date;
-
 public class CreateJwt {
 
     public static String createAccessToken(Member memberEntity) {

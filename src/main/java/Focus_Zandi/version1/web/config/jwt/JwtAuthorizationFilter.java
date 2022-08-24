@@ -54,14 +54,19 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // 내가 SecurityContext에 집적접근해서 세션을 만들때 자동으로 UserDetailsService에 있는
         // loadByUsername이 호출됨.
         String username = null;
+        String restoreAccessToken = null;
 
         try {
             username = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(access_token)
                     .getClaim("username").asString();
+
+            restoreAccessToken = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(refresh_token)
+                    .getClaim("AccessToken").asString();
+
         } catch (TokenExpiredException e) {
             String restoreUsername = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(refresh_token)
                     .getClaim("username").asString();
-            if (restoreUsername != null) {
+            if (restoreUsername != null && restoreAccessToken == access_token) {
                 Member member = memberRepository.findByUsername(restoreUsername);
                 String accessToken = CreateJwt.createAccessToken(member);
                 String refreshToken = CreateJwt.createRefreshToken(member, accessToken);

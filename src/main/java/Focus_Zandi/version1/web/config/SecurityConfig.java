@@ -49,14 +49,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Photo/**").permitAll()
                 .antMatchers("/style.css").permitAll()
                 .antMatchers("/").permitAll()
+                .antMatchers("/index").permitAll()
+
+                .antMatchers("/templates/**").permitAll()
+                .antMatchers("/developers").permitAll()
+                .antMatchers("/templates/Photo/**").permitAll()
                 .anyRequest().authenticated();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/oauth/**");
+
         web.ignoring().antMatchers("/");
+        web.ignoring().antMatchers("/index");
         web.ignoring().antMatchers("/Photo/**");
         web.ignoring().antMatchers("/style.css");
+
+        web.ignoring().antMatchers("/developers");
+        web.ignoring().antMatchers("/templates/**");
+        web.ignoring().antMatchers("/templates/basic/Photo/**");
     }
 }

@@ -6,6 +6,7 @@ import Focus_Zandi.version1.domain.dto.followdto.FollowerNumberReturnerNumDto;
 import Focus_Zandi.version1.domain.dto.followdto.FollowerSetterDto;
 import Focus_Zandi.version1.domain.dto.memberdto.DetailsDto;
 import Focus_Zandi.version1.domain.dto.memberdto.MemberReturnerDto;
+import Focus_Zandi.version1.web.repository.FollowersRepository;
 import Focus_Zandi.version1.web.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class MemberController {
+
     private final MemberService memberService;
+    private final FollowersRepository followersRepository;
 
     //DTO 수정해서 프론트 요구사항 맞추면 됨
     //유저 정보 조회
@@ -65,8 +68,13 @@ public class MemberController {
 
     // 친구 추가
     @GetMapping("/addFriend/{email}")
-    public FolloweeReturner addFriend (@PathVariable String email, Authentication authentication, HttpServletResponse response, HttpServletRequest request) {
-        return memberService.makeFollow(email, getUsername(authentication));
+    public FolloweeReturner addFriend (@PathVariable String email, Authentication authentication, HttpServletResponse response, HttpServletRequest request) throws IOException {
+        FolloweeReturner followeeReturner = memberService.makeFollow(email, getUsername(authentication));
+        if (followeeReturner == null) {
+            response.sendError(400, "Failed to add friend");
+            return null;
+        }
+        return  followeeReturner;
     }
 
     // 친구 삭제
